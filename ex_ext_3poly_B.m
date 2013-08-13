@@ -1,0 +1,26 @@
+%% unbounded 3 polygon example
+clear
+
+
+%%
+P = extpolys(...
+  [ 0.56+0.64i -0.38+0.85i -0.71-0.64i 0.71-0.54i ],...
+  [ 2.70+0.81i 3.61+1.57i 2.31+1.72i ],...
+  [ 2.64-0.79i 2.41-1.81i 3.81-1.68i 3.73-0.94i ] ...
+);
+
+Cg = circdomain(...
+  { 0 1 [ 0 pi/2 pi 3*pi/2 ] },...
+  { 3+1.5i 1 [ pi 5*pi/3 pi/3 ] },...
+  { 3-1.5i 1 [ pi 3*pi/2 0 pi/2 ] } ...
+);
+
+
+%%
+opts = extmapopts;
+opts.method = 'fpls';
+opts.monitor = 1;
+
+f = extmap(P,circdomain(Cg),opts);
+
+% plot(f)

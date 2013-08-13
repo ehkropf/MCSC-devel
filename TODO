@@ -1,0 +1,27 @@
+General
+ - Make sure help text exists in all function/class files.
+ - Are there default settings, and are they adequate?
+ - Write example document file.
+
+
+Code cleanup
+ - Change classes to have more descriptive property variables, i.e., P -> poly_domain, etc.
+
+
+Development
+ - implement aspect ratio limitations when plotting domains (prevent "squished" pictures)
+ - make sure circledomain has copy constructor ability
+ - solver and quadrature (others?) need their own options class
+ - change plots to use new grey grid lines
+
+
+Debugging
+ - Fix bounded case when origin is on or inside a circle (via self map of unit disk).
+
+
+Cleanup
+ - Change objects to use the options class, including but not limited to
+   - mcscmap
+   - quadrature and children
+   - nesolver and children
+ - Putting visual monitoring in the objective functions pointed out some things that need to be handled in the super class.

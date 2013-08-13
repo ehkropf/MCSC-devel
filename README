@@ -1,0 +1,4 @@
+Until the arrival of actual documentation, see the example files:
+
+  - ex_ext_*.m for unbounded (external) maps
+  - ex_int_*.m for bounded (interior) maps
