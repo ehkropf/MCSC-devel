@@ -1,4 +1,9 @@
-Until the arrival of actual documentation, see the example files:
+Until the arrival of actual documentation, see the commented example files:
 
-  - ex_ext_*.m for unbounded (external) maps
-  - ex_int_*.m for bounded (interior) maps
+  - example_driver_ext.m for unbounded (exterior) maps
+  - example_dirver_int.m for bounded (interior) maps
+
+Some other examples are in
+
+  - ex_ext_*.m for some unbounded maps
+  - ex_int_*.m for some bounded maps
