@@ -1,18 +1,19 @@
 %% resistor example
 % irregular poly -> circle -> rectangle
 clear
-clear fungenbd4_5
 
 
 N = 9;
 
 
 %% irregular polygon
-P = polygons(...
+P = intpolys(...
   polygon([ 0 -3i 3-3i 3+3i -3+3i -3 ]),...
   polygon([ -0.2+1.2i -0.2+1.7i -1.9+1.7i -1.9+1.2i ]),...
   polygon([ 1.2-0.3i 1.2-1.8i 1.8-1.8i 1.8-0.3i ])...
 );
+
+return
 vl4 = [ 5 6 3 4 ];
 fixed = [0; 0.6+0.6i];
 [m vc vl beta] = polydat(P);
