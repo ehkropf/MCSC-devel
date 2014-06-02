@@ -1,43 +1,58 @@
-%% resistor example
-% irregular poly -> circle -> rectangle
+%% Resistor example.
 clear
 
+N = 9;                % reflection level
 
-N = 9;
 
-
-%% irregular polygon
+%%
+% L-shape with two rectangular holes.
 P = intpolys(...
   polygon([ 0 -3i 3-3i 3+3i -3+3i -3 ]),...
   polygon([ -0.2+1.2i -0.2+1.7i -1.9+1.7i -1.9+1.2i ]),...
   polygon([ 1.2-0.3i 1.2-1.8i 1.8-1.8i 1.8-0.3i ])...
 );
 
+% Determines f(fixed_pt(1)) = fixed_pt(2).
+fixed_pt = [0; 0.6+0.6i];
+
+
+%%
+% Circle domain inital guess. From previous trial and error.
+
+Cg = circdomain(...
+  {0, 1, [0, 1.59, 1.78, 3.13, 4.47, 4.68]}, ...
+  {-0.13-0.69i, 0.16, [1.19, 2.53, 4.37, 5.04]}, ...
+  {-0.12+0.71i, 0.15, [5.16, 7.43, 8.18, 9.93]} ...
+);
+
+% return
+% vl4 = [ 5 6 3 4 ];
+% [m vc vl beta] = polydat(P);
+% 
+% X0 = [...
+%   0.16; 0.15;
+%   -0.13; -0.69; -0.12; 0.71;
+%   1.59; 1.78; 3.13; 4.47; 4.68;
+%   1.19; 2.53; 4.37; 5.04;
+%   5.16; 7.43; 8.18; 9.93;
+% ];
+
+
+%%
+% Find circle domain/get SC map.
+
+opts = intmapopts;
+opts.monitor = true;
+opts.fignum = 1;
+opts.N = N;
+f = intmap(P, fixed_pt, circdomain(Cg), opts);
+
+% Xc = solve_parambd(P,N,fixed,X0,1);
+% [c r t] = circDomain(Xc,vc);
+% 
+% f = make_mapbd(Xc,P,N,fixed);
+
 return
-vl4 = [ 5 6 3 4 ];
-fixed = [0; 0.6+0.6i];
-[m vc vl beta] = polydat(P);
-
-X0 = [...
-  0.16; 0.15;
-  -0.13; -0.69; -0.12; 0.71;
-  1.59; 1.78; 3.13; 4.47; 4.68;
-  1.19; 2.53; 4.37; 5.04;
-  5.16; 7.43; 8.18; 9.93;
-];
-
-
-
-%*************************************
-%% get the circle domain and polygon map
-
-% figure(1),clf
-Xc = solve_parambd(P,N,fixed,X0,1);
-[c r t] = circDomain(Xc,vc);
-
-f = make_mapbd(Xc,P,N,fixed);
-
-
 
 %************************************
 %% find rectangle domain
