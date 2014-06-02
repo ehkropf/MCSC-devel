@@ -23,6 +23,7 @@ fixed = [0.0; 0.0];
 %%
 opts = intmapopts;
 opts.monitor = true;
+opts.fignum = 1;
 opts.N = 4;
 
 C = circdomain(Cg);
