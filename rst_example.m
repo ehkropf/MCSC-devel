@@ -1,4 +1,4 @@
-%% resistor problem example
+%% Circle domain to slit rectangle.
 clear
 clear fungenbd_rst2
 
