@@ -14,6 +14,7 @@ for j = 2:m
 end
 PR = polygons(pr);
 
+% Get the generalized quadralateral vertices.
 tr = zeros(4,m);
 tr(1,1) = t(vl4(1),1);
 for k = 2:4
@@ -23,6 +24,7 @@ for k = 2:4
   end
 end
 
+% Initial circle domain guess.
 XR0 = zeros(2*(m-1),1);
 for j = 2:m
   XR0(2*j-3:2*j-2) = [tr(1,1),tr(1,1)+pi];

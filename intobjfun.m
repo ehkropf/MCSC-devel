@@ -47,7 +47,7 @@ classdef intobjfun < objectivefun
         args = { P };
         
         if nargin > 3 && ~isempty(opts)
-          args = { args{:} opts.monitor, opts.fignum };
+          args = { args{:}, opts.monitor, opts.fignum }; %#ok<CCAT>
         end
       else
         args = {};

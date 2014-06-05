@@ -27,7 +27,7 @@ properties (Abstract)
 end
 
 methods (Static)
-  function [co ro] = centrad(c,r,ci,ri)
+  function [co, ro] = centrad(c,r,ci,ri)
     % reflects circle with center ci, radius ri through circle with
     % center c, radius r, to get circle with center co, radius ro
     
@@ -103,7 +103,7 @@ methods (Static)
             if j1 ~= jlr(nu,j)
               nuj = nuj+1;
               jlr(nuj,j) = j1;
-              [cn(nuj,j) rn(nuj,j)] = ...
+              [cn(nuj,j), rn(nuj,j)] = ...
                 fpintrefl.centrad(cn(1,j1),rn(1,j1),cn(nu,j),rn(nu,j));
               zn(1:vc(j),nuj,j) = ...
                 fpintrefl.reflect(cn(1,j1),rn(1,j1),zn(1:vc(j),nu,j));
