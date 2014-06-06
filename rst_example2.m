@@ -16,6 +16,9 @@ P = intpolys(...
 % Determines f(fixed_pt(1)) = fixed_pt(2).
 fixed_pt = [0; 0.7+0.7i];
 
+% The 4 vertices of P that will define the generalized quadralateral.
+genquad = [2, 3, 5, 6];
+
 
 %%
 % Circle domain inital guess. From previous trial and error.
@@ -32,37 +35,23 @@ Cg = circdomain(...
   { 0.0154+0.6555i 0.2303 [ 1.3835 1.9222 2.4408 2.6566 ]*pi } ...
 );
 
-% return
-% vl4 = [ 5 6 3 4 ];
-% [m vc vl beta] = polydat(P);
-% 
-% X0 = [...
-%   0.16; 0.15;
-%   -0.13; -0.69; -0.12; 0.71;
-%   1.59; 1.78; 3.13; 4.47; 4.68;
-%   1.19; 2.53; 4.37; 5.04;
-%   5.16; 7.43; 8.18; 9.93;
-% ];
-
 
 %%
-% Find circle domain/get SC map.
+% Find circle domain/get SC map for P.
 
 opts = intmapopts;
 opts.monitor = true;
 opts.fignum = 1;
 opts.N = N;
-f = intmap(P, fixed_pt, circdomain(Cg), opts);
 
-% Xc = solve_parambd(P,N,fixed,X0,1);
-% [c r t] = circDomain(Xc,vc);
-% 
-% f = make_mapbd(Xc,P,N,fixed);
+f = intmap(P, fixed_pt, circdomain(Cg), opts);
+C = f.C;
 
 return
 
-%************************************
-%% find rectangle domain
+
+%%
+% Find rectangle domain given C.
 
 [PR g gp tr] = rst_solve_rect(c,r,t,vl4,N);
 zr = preVertices(c,r,tr,PR.vc);
