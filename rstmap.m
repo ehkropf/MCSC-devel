@@ -43,8 +43,8 @@ methods
       
       % Circle domain for generalized rectangle.
       Cr = cell(m, 1);
-      Cr{1} = {C.c(1), C.r(1), unwrap(C.t(1,genrect))};
-      st = C.t(1,genrect(1)) + [0, pi];
+      Cr{1} = {C.c(1), C.r(1), unwrap(C.t(genrect,1))};
+      st = C.t(genrect(1),1) + [0, pi];
       for j = 2:m
         Cr{j} = {C.c(j), C.r(j), st};
       end
@@ -63,10 +63,11 @@ methods
       args{3} = Cr;
       
       % Instantiate objective function.
-      args{4} = rstobjfun(Prect, Cr, genrect, opts);
+      ofun = rstobjfun(Prect, Cr, genrect, opts);
+      args{4} = ofun;
       
       % Instantiate numerical solver.
-      args{5} = numcontin(args{4}, C.Xu);
+      args{5} = numcontin(ofun, unconstrain(ofun));
       args{5}.tolerance = opts.tolerance;
     end
      

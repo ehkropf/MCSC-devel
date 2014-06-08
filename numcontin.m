@@ -198,7 +198,7 @@ classdef numcontin < nesolver
   end % methods
 
   methods (Static)    
-    function [t Q R] = tangent(A,orient)
+    function [t, Q, R] = tangent(A,orient)
       N = size(A,1);
       [Q,R] = qr(A');
       t = Q(:,N+1);

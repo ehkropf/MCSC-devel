@@ -30,9 +30,9 @@ genquad = [2, 3, 5, 6];
 % );
 
 Cg = circdomain(...
-  { 0 1 [ 0 0.4766 0.5439 0.9999 1.4565 1.5239 ]*pi },...
-  { 0.0160-0.6556i 0.2304 [ 0.6166 1.3437 1.5596 2.0773 ]*pi },...
-  { 0.0154+0.6555i 0.2303 [ 1.3835 1.9222 2.4408 2.6566 ]*pi } ...
+  { 0 1 [ 0 0.4892 0.5424 0.9983 1.4562 1.5143 ]*pi },...
+  { 0.0131-0.6400i 0.2206 [ 0.6178 1.3193 1.5567 2.0656 ]*pi },...
+  { 0.0167+0.6295i 0.2129 [ 1.3781 1.9414 2.4401 2.6990 ]*pi } ...
 );
 
 
@@ -40,21 +40,24 @@ Cg = circdomain(...
 % Find circle domain/get SC map for P.
 
 opts = intmapopts;
-opts.monitor = true;
+opts.monitor = false;
 opts.fignum = 1;
 opts.N = N;
 
 f = intmap(P, fixed_pt, circdomain(Cg), opts);
 C = f.C;
 
-return
-
 
 %%
 % Find rectangle domain given C.
 
-[PR g gp tr] = rst_solve_rect(c,r,t,vl4,N);
-zr = preVertices(c,r,tr,PR.vc);
+opts.monitor = false;
+g = rstmap(C, genquad, opts);
+PR = g.P;
+zr = prevertices(g.C);
+
+% [PR g gp tr] = rst_solve_rect(c,r,t,vl4,N);
+% zr = preVertices(c,r,tr,PR.vc);
 
 % bottom, then top here...
 rN9  = [ 1.919740023295317   1.919732662327783 ];
