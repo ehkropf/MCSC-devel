@@ -34,6 +34,7 @@ methods
       
       % Create quadrature object.
       fprime = opts.fpclassh(Prect, Cr, opts.N);
+      opts.ngj = 32;
       F.quad = gjquad(Prect, fprime, opts.ngj, opts.halfrule);
     end
   end

@@ -57,11 +57,6 @@ classdef numcontin < nesolver
       secs = toc;
       S.soltime = secs;
       
-%       if abs(1 - S.lambda) > 1e-6
-%         warning('MCSC:checkoutput',...
-%           'Solver output may not be trustworthy.')
-%       end
-      
       fprintf('\nContinuation took %.3f seconds.\n',secs)
       fprintf('Final 1-lambda value was %.6g.\n',1-S.lambda)
       fprintf('Inf norm of objective function is %.6g\n\n',...
@@ -79,6 +74,8 @@ classdef numcontin < nesolver
       %
       % Input or set initial point, initial step, min step, corrector tol, max
       % contract, max distance from curve.
+      
+      % Original matlab version used here written by Toby Driscoll, 20??.
       
       h = 1/16;
       monitor = 1;
@@ -127,9 +124,10 @@ classdef numcontin < nesolver
           refinecount = refinecount+1;
           continue
         end
-        
-        % Perturb to avoid cancellation. (?)
-        pf = -S.perturb*sign(Fu) .* double(abs(Fu) < S.perturb);
+
+        pf = 0;
+%         % Perturb to avoid cancellation. (?)
+%         pf = -S.perturb*sign(Fu) .* double(abs(Fu) < S.perturb);
         
         % Corrector step.
         du = Q(:,1:N) * (R(1:N,1:N)' \ (Fu-pf));
@@ -147,9 +145,6 @@ classdef numcontin < nesolver
           refinecount = refinecount+1;
         else
           S.ofunnorm = norm(Fv-(v(1)-1)*S.f0,inf);
-%           fprintf(['Stepsize = % 9.3g;  lambda =% 11.5g;  ',...
-%             '||F(x)|| =% 10.4g\n'],...
-%             h,v(monitor),S.ofunnorm);
           fprintf(' % 9.3g    % 9.3g    % 10.4g\n',...
             h,1-v(monitor),S.ofunnorm);
 
